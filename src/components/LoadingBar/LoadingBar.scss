@@ -1,0 +1,25 @@
+$_loading-bar-height: .5rem;
+$_loading-bar-min-width: 200px;
+
+.loading-bar-container {
+    width: 100%;
+    min-width: 100px;
+    height: $_loading-bar-height;
+    background-color: var(--app-loading-bar-background);
+    position: relative;
+}
+
+.loaded-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $_loading-bar-min-width;
+    height: $_loading-bar-height;
+    background-color: var(--app-loading-bar-loaded-background);
+    animation: move 1.2s linear infinite;
+}
+
+@keyframes move {
+    0% { left: 0 }
+    100% { left: calc(100% - #{$_loading-bar-min-width}) }
+}

@@ -1,10 +1,12 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Routes,
     Route,
 } from 'react-router-dom';
 import Header from '../components/Header/Header';
+import PageLoader from '../components/PageLoader/PageLoader';
+import { queriesToLoadPage } from '../pages/Home/Home.queries';
 
 const Home = React.lazy(() => import('../pages/Home/Home'));
 
@@ -15,11 +17,7 @@ function MainRouter() {
             <Routes>
                 <Route
                     path="/"
-                    element={(
-                        <Suspense fallback={<div />}>
-                            <Home />
-                        </Suspense>
-                    )}
+                    element={<PageLoader reactNode={<Home />} queries={queriesToLoadPage} />}
                 />
             </Routes>
         </Router>
