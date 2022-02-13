@@ -1,8 +1,4 @@
-import {
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import { useContext, useEffect } from 'react';
 import AppContext from '../../components/App/Context';
 
 function doesItemHaveImage({ image, bannerImage }) {
@@ -14,11 +10,11 @@ function getImage({ image: { large }, id }) {
 }
 
 function useHomeLoader(graphQLCall = () => {}) {
-    const [isLoading, setLoading] = useState(true);
-    const [, setAppState] = useContext(AppContext);
+    const [{ isLoading }, setAppState] = useContext(AppContext);
 
     useEffect(
         () => {
+            setAppState((currentState) => ({ ...currentState, isLoading: true }));
             graphQLCall().then((queryResults) => {
                 const [mediaResponse, staffResponse, charactersResponse] = queryResults;
                 const { data: { Page: { media } } } = mediaResponse;
@@ -30,14 +26,14 @@ function useHomeLoader(graphQLCall = () => {}) {
                     media: media.filter(doesItemHaveImage),
                     staff: staff.filter(doesItemHaveImage).map(getImage),
                     characters: characters.filter(doesItemHaveImage).map(getImage),
+                    isLoading: false,
                 }));
-                setLoading(false);
             });
         },
         [graphQLCall, setAppState],
     );
 
-    return [isLoading, setLoading];
+    return isLoading;
 }
 
 export default useHomeLoader;

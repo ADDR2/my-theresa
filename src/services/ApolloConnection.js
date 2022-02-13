@@ -12,13 +12,18 @@ const {
 const BACKEND_PORT = REACT_APP_BACKEND_PORT ? `:${REACT_APP_BACKEND_PORT}` : '';
 const BACKEND_PREFIX_URL = `${REACT_APP_BACKEND_PROTOCOL}://${REACT_APP_BACKEND_DOMAIN}${BACKEND_PORT}`;
 
-let LAST_RESPONSE_OBJECT_ID = -1;
+const HOME_QUERY_IDS = {
+    media: 1,
+    staff: 2,
+    characters: 3,
+};
 
 function dataIdFromObject(responseObject) {
-    LAST_RESPONSE_OBJECT_ID += 1;
-
     switch (responseObject.__typename) {
-        case 'Page': return `Page:${LAST_RESPONSE_OBJECT_ID}`;
+        case 'Page': {
+            const homeQueryType = Object.keys(HOME_QUERY_IDS).find((key) => key in responseObject);
+            return `Page:${HOME_QUERY_IDS[homeQueryType]}`;
+        }
         default: return defaultDataIdFromObject(responseObject);
     }
 }

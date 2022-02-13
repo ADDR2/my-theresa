@@ -4,8 +4,10 @@ import MainRouter from '../../routers/MainRouter';
 import ApolloConnection from '../../services/ApolloConnection';
 import AppContext from './Context';
 
+const PureMainRouter = React.memo(MainRouter);
+
 function App() {
-    const [appState, setAppState] = useState({});
+    const [appState, setAppState] = useState({ isLoading: true });
     const memoizedState = useMemo(
         () => ([appState, setAppState]),
         [appState, setAppState],
@@ -14,7 +16,7 @@ function App() {
     return (
         <ApolloProvider client={ApolloConnection}>
             <AppContext.Provider value={memoizedState}>
-                <MainRouter />
+                <PureMainRouter />
             </AppContext.Provider>
         </ApolloProvider>
     );

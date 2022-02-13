@@ -1,6 +1,7 @@
 import { useApolloClient } from '@apollo/client';
 import { Suspense, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import LoadingBar from '../LoadingBar/LoadingBar';
 
 function PageLoader({
@@ -9,18 +10,21 @@ function PageLoader({
     useLoader,
 }) {
     const client = useApolloClient();
+    const params = useParams();
 
     async function executeQueries() {
         try {
-            return await Promise.all(queries.map((query) => client.query({ query })));
+            return await Promise.all(queries.map(
+                (query) => client.query({ query, variables: params || {} }),
+            ));
         } catch (error) {
             console.warn(error);
             return [];
         }
     }
 
-    const memoizedQueryCallback = useCallback(executeQueries, [client, queries]);
-    const [isLoading] = useLoader(memoizedQueryCallback);
+    const memoizedQueryCallback = useCallback(executeQueries, [client, queries, params]);
+    const isLoading = useLoader(memoizedQueryCallback);
 
     if (isLoading) return <LoadingBar />
 

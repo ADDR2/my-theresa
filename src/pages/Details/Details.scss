@@ -1,0 +1,11 @@
+@use '../../styles/abstracts/layout.scss';
+
+.details-page {
+    padding: layout.$app-page-padding;
+    width: 100%;
+}
+
+.details-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
