@@ -1,8 +1,14 @@
 @use '../../styles/abstracts/layout.scss';
 
+.carousel-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
+
 .carousel-container {
     height: layout.$app-carousel-height;
     position: relative;
+    margin: 1rem 0 0 0;
 }
 
 .carousel-window {

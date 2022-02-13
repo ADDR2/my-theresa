@@ -15,6 +15,7 @@ function Carousel({
     items,
     linkPath,
     hasBanners,
+    title,
 }) {
     const [selectedItem, setSelected] = useState(0);
     const [carouselWindowWidth, setCarouselWidth] = useState(0);
@@ -40,41 +41,45 @@ function Carousel({
     );
 
     return (
-        <div className="carousel-container">
-            {canMoveToLeft
-                ? (
-                    <CarouselButton classes="carousel-move-left" clickHandler={getClickHandler(-1)}>
-                        <div className="arrow-left" />
-                    </CarouselButton>
-                )
-                : null}
-            <div ref={carouselWindowRef} className="carousel-window">
-                <div className="carousel" style={carouselStyles}>
-                    { items.map((item, index) => (
-                        <CarouselItem
-                            key={`carousel-image-${item.id}`}
-                            path={`${linkPath}${item.id}`}
-                            isSelected={index === selectedItem || !!item.bannerImage}
-                            styles={{ width: item.bannerImage ? (carouselWindowWidth || 'auto') : `${PROFILE_IMAGE_WIDTH}px` }}
-                            focusHandler={() => setSelected(() => index)}
-                            {...item}
-                        />
-                    ))}
+        <section>
+            <h1 className="carousel-title">{ title }</h1>
+            <div className="carousel-container">
+                {canMoveToLeft
+                    ? (
+                        <CarouselButton classes="carousel-move-left" clickHandler={getClickHandler(-1)}>
+                            <div className="arrow-left" />
+                        </CarouselButton>
+                    )
+                    : null}
+                <div ref={carouselWindowRef} className="carousel-window">
+                    <div className="carousel" style={carouselStyles}>
+                        { items.map((item, index) => (
+                            <CarouselItem
+                                key={`carousel-image-${item.id}`}
+                                path={`${linkPath}${item.id}`}
+                                isSelected={index === selectedItem || !!item.bannerImage}
+                                styles={{ width: item.image ? `${PROFILE_IMAGE_WIDTH}px` : (carouselWindowWidth || 'auto') }}
+                                focusHandler={() => setSelected(() => index)}
+                                {...item}
+                            />
+                        ))}
+                    </div>
                 </div>
+                {canMoveToRight
+                    ? (
+                        <CarouselButton classes="carousel-move-right" clickHandler={getClickHandler(1)}>
+                            <div className="arrow-right" />
+                        </CarouselButton>
+                    )
+                    : null}
             </div>
-            {canMoveToRight
-                ? (
-                    <CarouselButton classes="carousel-move-right" clickHandler={getClickHandler(1)}>
-                        <div className="arrow-right" />
-                    </CarouselButton>
-                )
-                : null}
-        </div>
+        </section>
     );
 }
 
 Carousel.defaultProps = { hasBanners: false };
 Carousel.propTypes = {
+    title: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         image: PropTypes.string,
