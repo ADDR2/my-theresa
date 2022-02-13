@@ -54,7 +54,7 @@ function Carousel({
                         <CarouselItem
                             key={`carousel-image-${item.id}`}
                             path={`${linkPath}${item.id}`}
-                            isSelected={index === selectedItem || item.bannerImage}
+                            isSelected={index === selectedItem || !!item.bannerImage}
                             styles={{ width: item.bannerImage ? (carouselWindowWidth || 'auto') : `${PROFILE_IMAGE_WIDTH}px` }}
                             focusHandler={() => setSelected(() => index)}
                             {...item}
