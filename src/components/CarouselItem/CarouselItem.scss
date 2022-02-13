@@ -1,0 +1,12 @@
+@use '../../styles/abstracts/layout.scss';
+
+.carousel-image {
+    height: layout.$app-carousel-height;
+    opacity: 0.6;
+    transition: opacity 200ms ease-in-out;
+    width: inherit;
+
+    &.selected {
+        opacity: 1;
+    }
+}

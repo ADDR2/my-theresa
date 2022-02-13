@@ -17,9 +17,10 @@
         "react/jsx-indent-props": ["error", 4],
         "object-curly-newline": ["error", { "minProperties": 3, "multiline": true }],
         "linebreak-style": 0,
-        "max-len": ["error", { "code": 120 }],
+        "max-len": ["error", { "code": 130 }],
         "react/forbid-prop-types": 0,
         "no-console": ["error", { "allow": ["warn", "error"] }],
-        "no-underscore-dangle": 0
+        "no-underscore-dangle": 0,
+        "react/jsx-props-no-spreading": 0
     }
 }

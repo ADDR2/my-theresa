@@ -1,22 +1,18 @@
 import { useApolloClient } from '@apollo/client';
-import {
-    Suspense,
-    useCallback,
-    useEffect,
-    useState,
-} from 'react';
+import { Suspense, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import LoadingBar from '../LoadingBar/LoadingBar';
-import './PageLoader.scss';
 
-function PageLoader({ queries = [], reactNode }) {
+function PageLoader({
+    queries,
+    reactNode,
+    useLoader,
+}) {
     const client = useApolloClient();
-    const [isLoading, setLoading] = useState(true);
 
     async function executeQueries() {
         try {
-            const results = await Promise.all(queries.map((query) => client.query({ query })));
-            return results;
+            return await Promise.all(queries.map((query) => client.query({ query })));
         } catch (error) {
             console.warn(error);
             return [];
@@ -24,15 +20,7 @@ function PageLoader({ queries = [], reactNode }) {
     }
 
     const memoizedQueryCallback = useCallback(executeQueries, [client, queries]);
-
-    useEffect(
-        () => {
-            memoizedQueryCallback().then(() => {
-                setLoading(false);
-            });
-        },
-        [memoizedQueryCallback],
-    );
+    const [isLoading] = useLoader(memoizedQueryCallback);
 
     if (isLoading) return <LoadingBar />
 
@@ -43,7 +31,11 @@ function PageLoader({ queries = [], reactNode }) {
     );
 }
 
-PageLoader.defaultProps = { queries: [] };
-PageLoader.propTypes = { queries: PropTypes.arrayOf(PropTypes.any), reactNode: PropTypes.any.isRequired };
+PageLoader.defaultProps = { queries: [], useLoader: () => {} };
+PageLoader.propTypes = {
+    queries: PropTypes.arrayOf(PropTypes.any),
+    reactNode: PropTypes.any.isRequired,
+    useLoader: PropTypes.func,
+};
 
 export default PageLoader;

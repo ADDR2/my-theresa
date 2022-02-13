@@ -1,0 +1,9 @@
+@use '../../styles/abstracts/layout.scss';
+
+.home-page {
+    padding: layout.$app-page-padding;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: layout.$app-page-padding;
+}

@@ -1,0 +1,52 @@
+@use '../../styles/abstracts/layout.scss';
+
+$_button-size: 50px;
+
+.carousel-container {
+    height: layout.$app-carousel-height;
+    position: relative;
+}
+
+.carousel-window {
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: layout.$app-shadow;
+}
+
+.carousel {
+    width: 100%;
+    display: flex;
+    height: layout.$app-carousel-height;
+    z-index: 1;
+    transition: transform 200ms ease-in-out;
+}
+
+%carousel-button {
+    width: $_button-size;
+    height: $_button-size;
+    position: absolute;
+    border-radius: 50px;
+    background-color: var(--header-background-color);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    z-index: 2;
+
+    &:focus, &:hover {
+        opacity: 1;
+        outline: layout.$app-outline;
+        outline-offset: 2px;
+    }
+}
+
+.carousel-move-left {
+    @extend %carousel-button;
+    top: calc((#{layout.$app-carousel-height} / 2) - (#{$_button-size} / 2));
+    left: -1.5rem;
+}
+
+.carousel-move-right {
+    @extend %carousel-button;
+    top: calc((#{layout.$app-carousel-height} / 2) - (#{$_button-size} / 2));
+    right: -1.5rem;
+}
