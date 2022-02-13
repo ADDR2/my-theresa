@@ -12,9 +12,15 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
-        "indent": ["error", 4],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
-        "object-curly-newline": ["error", { "minProperties": 3 }]
+        "object-curly-newline": ["error", { "minProperties": 3, "multiline": true }],
+        "linebreak-style": 0,
+        "max-len": ["error", { "code": 130 }],
+        "react/forbid-prop-types": 0,
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "no-underscore-dangle": 0,
+        "react/jsx-props-no-spreading": 0
     }
 }

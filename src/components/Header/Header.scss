@@ -1,0 +1,15 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid var(--header-boder-color);
+    background-color: var(--header-background-color);
+}
+
+.header-logo {
+    text-decoration: none;
+    color: var(--header-logo-color);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0.3rem;
+}

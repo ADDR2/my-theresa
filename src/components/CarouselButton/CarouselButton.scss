@@ -1,0 +1,24 @@
+@use '../../styles/abstracts/layout.scss';
+
+.carousel-button {
+    width: layout.$app-carousel-button-size;
+    height: layout.$app-carousel-button-size;
+    position: absolute;
+    border-radius: layout.$app-carousel-button-size;
+    background-color: var(--carousel-button-background);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    z-index: 2;
+    border: none;
+    padding: 0;
+
+    &:focus, &:hover {
+        opacity: 1;
+    }
+
+    &:focus {
+        outline: layout.$app-outline;
+        outline-offset: 2px;
+    }
+}
