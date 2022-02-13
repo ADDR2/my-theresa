@@ -1,5 +1,15 @@
 @use '../../styles/abstracts/layout.scss';
 
+.carousel-link {
+    cursor: default;
+    pointer-events: none;
+
+    & .selected {
+        cursor: pointer;
+        pointer-events: auto;
+    }
+}
+
 .carousel-image {
     height: layout.$app-carousel-height;
     opacity: 0.6;
