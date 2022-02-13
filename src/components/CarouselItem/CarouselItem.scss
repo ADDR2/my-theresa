@@ -8,6 +8,10 @@
         cursor: pointer;
         pointer-events: auto;
     }
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .carousel-image {

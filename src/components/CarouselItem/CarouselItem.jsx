@@ -9,9 +9,10 @@ function CarouselItem({
     path,
     isSelected,
     styles,
+    focusHandler,
 }) {
     return (
-        <Link className="carousel-link" to={path} style={styles}>
+        <Link className="carousel-link" to={path} style={styles} onFocus={focusHandler}>
             <img
                 alt="Carousel Item"
                 className={`carousel-image ${isSelected ? 'selected' : ''}`}
@@ -26,6 +27,7 @@ CarouselItem.defaultProps = {
     bannerImage: '',
     isSelected: false,
     styles: {},
+    focusHandler: () => {},
 };
 CarouselItem.propTypes = {
     path: PropTypes.string.isRequired,
@@ -33,6 +35,7 @@ CarouselItem.propTypes = {
     bannerImage: PropTypes.string,
     isSelected: PropTypes.bool,
     styles: PropTypes.any,
+    focusHandler: PropTypes.func,
 };
 
 export default CarouselItem;

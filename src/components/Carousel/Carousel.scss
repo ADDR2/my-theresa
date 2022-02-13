@@ -1,7 +1,5 @@
 @use '../../styles/abstracts/layout.scss';
 
-$_button-size: 50px;
-
 .carousel-container {
     height: layout.$app-carousel-height;
     position: relative;
@@ -21,32 +19,65 @@ $_button-size: 50px;
     transition: transform 200ms ease-in-out;
 }
 
-%carousel-button {
-    width: $_button-size;
-    height: $_button-size;
-    position: absolute;
-    border-radius: 50px;
-    background-color: var(--header-background-color);
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 200ms ease-in-out;
-    z-index: 2;
-
-    &:focus, &:hover {
-        opacity: 1;
-        outline: layout.$app-outline;
-        outline-offset: 2px;
-    }
+%carousel-move-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-move-left {
-    @extend %carousel-button;
-    top: calc((#{layout.$app-carousel-height} / 2) - (#{$_button-size} / 2));
+    @extend %carousel-move-button;
     left: -1.5rem;
+    top: calc((#{layout.$app-carousel-height} / 2) - (#{layout.$app-carousel-button-size} / 2));
 }
 
 .carousel-move-right {
-    @extend %carousel-button;
-    top: calc((#{layout.$app-carousel-height} / 2) - (#{$_button-size} / 2));
+    @extend %carousel-move-button;
     right: -1.5rem;
+    top: calc((#{layout.$app-carousel-height} / 2) - (#{layout.$app-carousel-button-size} / 2));
+}
+
+$_arrow-height: 7px;
+$_arrow-width: 9px;
+$_arrow-content-offset: 2px;
+$_arrow-background: transparent;
+$_arrow-style: solid;
+
+%arrow {
+    width: 0;
+    height: 0;
+    position: relative;
+    border-top: $_arrow-height $_arrow-style $_arrow-background;
+    border-bottom: $_arrow-height $_arrow-style $_arrow-background;
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: $_arrow-height $_arrow-style $_arrow-background;
+        border-bottom: $_arrow-height $_arrow-style $_arrow-background;
+    }
+}
+
+.arrow-left {
+    @extend %arrow;
+    border-right: $_arrow-width $_arrow-style var(--carousel-button-arrow-color);
+
+    &:after {
+        top: -$_arrow-height;
+        left: $_arrow-content-offset;
+        border-right: $_arrow-width $_arrow-style var(--carousel-button-background);
+    }
+}
+
+.arrow-right {
+    @extend %arrow;
+    border-left: $_arrow-width $_arrow-style var(--carousel-button-arrow-color);
+
+    &:after {
+        top: -$_arrow-height;
+        right: $_arrow-content-offset;
+        border-left: $_arrow-width $_arrow-style var(--carousel-button-background);
+    }
 }

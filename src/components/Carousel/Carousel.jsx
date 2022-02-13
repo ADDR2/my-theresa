@@ -4,6 +4,7 @@ import {
     useRef,
     useState,
 } from 'react';
+import CarouselButton from '../CarouselButton/CarouselButton';
 import CarouselItem from '../CarouselItem/CarouselItem';
 
 import './Carousel.scss';
@@ -40,21 +41,34 @@ function Carousel({
 
     return (
         <div className="carousel-container">
-            { canMoveToLeft ? <button type="button" className="carousel-move-left" onClick={getClickHandler(-1)} /> : null }
+            {canMoveToLeft
+                ? (
+                    <CarouselButton classes="carousel-move-left" clickHandler={getClickHandler(-1)}>
+                        <div className="arrow-left" />
+                    </CarouselButton>
+                )
+                : null}
             <div ref={carouselWindowRef} className="carousel-window">
                 <div className="carousel" style={carouselStyles}>
                     { items.map((item, index) => (
                         <CarouselItem
                             key={`carousel-image-${item.id}`}
                             path={`${linkPath}${item.id}`}
-                            isSelected={index === selectedItem}
+                            isSelected={index === selectedItem || item.bannerImage}
                             styles={{ width: item.bannerImage ? (carouselWindowWidth || 'auto') : `${PROFILE_IMAGE_WIDTH}px` }}
+                            focusHandler={() => setSelected(() => index)}
                             {...item}
                         />
                     ))}
                 </div>
             </div>
-            { canMoveToRight ? <button type="button" className="carousel-move-right" onClick={getClickHandler(1)} /> : null }
+            {canMoveToRight
+                ? (
+                    <CarouselButton classes="carousel-move-right" clickHandler={getClickHandler(1)}>
+                        <div className="arrow-right" />
+                    </CarouselButton>
+                )
+                : null}
         </div>
     );
 }
