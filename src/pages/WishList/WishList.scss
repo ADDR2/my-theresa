@@ -1,0 +1,39 @@
+@use '../../styles/abstracts/layout.scss';
+@use '../../styles/abstracts/mixins.scss';
+
+.wish-list-page {
+    padding: layout.$app-page-padding;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: layout.$app-page-padding;
+}
+
+.wish-list-item {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid var(--wish-list-item-boder-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: layout.$app-page-padding;
+    border-radius: 6px;
+    background-color: var(--wish-list-item-background-color);
+}
+
+.wish-list-link {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:link {
+        color: var(--wish-list-item-link-color);
+    }
+}
+
+.wish-list-remove-icon {
+    @include mixins.roundButtonForIcon;
+}

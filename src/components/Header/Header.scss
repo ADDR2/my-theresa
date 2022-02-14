@@ -1,12 +1,16 @@
+@use '../../styles/abstracts/layout.scss';
+
 .header-container {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    column-gap: layout.$app-page-padding;
     padding: 1rem;
     border-bottom: 1px solid var(--header-boder-color);
     background-color: var(--header-background-color);
 }
 
-.header-logo {
+.header-logo, .wish-list-link {
     text-decoration: none;
     color: var(--header-logo-color);
     font-size: 18px;

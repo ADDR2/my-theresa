@@ -1,7 +1,21 @@
 @use '../../styles/abstracts/mixins.scss';
 
+$_anime-font: monospace;
+
 .staff-details-container {
     @include mixins.detailsContainer;
+    font-family: $_anime-font;
+}
+
+.title-section {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2rem;
+    align-items: center;
+}
+
+.star-outline, .star-filled {
+    @include mixins.roundButtonForIcon;
 }
 
 .staff-details-title {
