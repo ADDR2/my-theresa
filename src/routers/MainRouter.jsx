@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
     BrowserRouter as Router,
     Routes,
@@ -7,6 +7,7 @@ import {
 import AnimeDetails from '../components/AnimeDetails/AnimeDetails';
 import CharacterDetails from '../components/CharacterDetails/CharacterDetails';
 import Header from '../components/Header/Header';
+import LoadingBar from '../components/LoadingBar/LoadingBar';
 import PageLoader from '../components/PageLoader/PageLoader';
 import StaffDetails from '../components/StaffDetails/StaffDetails';
 import {
@@ -24,6 +25,7 @@ import { queriesToLoadHome } from '../pages/Home/Home.queries';
 
 const Home = React.lazy(() => import('../pages/Home/Home'));
 const Details = React.lazy(() => import('../pages/Details/Details'));
+const WishList = React.lazy(() => import('../pages/WishList/WishList'));
 
 function MainRouter() {
     return (
@@ -63,6 +65,10 @@ function MainRouter() {
                             useLoader={useCharacterDetailsLoader}
                         />
                     )}
+                />
+                <Route
+                    path="/wishlist"
+                    element={<Suspense fallback={<LoadingBar />}><WishList /></Suspense>}
                 />
             </Routes>
         </Router>

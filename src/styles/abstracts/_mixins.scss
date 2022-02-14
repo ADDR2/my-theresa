@@ -11,8 +11,10 @@
 }
 
 @mixin roundButtonForIcon {
-    width: 40px;
-    height: 40px;
+    width: layout.$app-round-icon-size;
+    height: layout.$app-round-icon-size;
+    min-width: layout.$app-round-icon-size;
+    min-height: layout.$app-round-icon-size;
     cursor: pointer;
     border-radius: layout.$app-carousel-button-size;
     background-color: var(--carousel-button-background);

@@ -1,10 +1,10 @@
 class WishListHandler {
     constructor() {
-        this.whishListCacheKey = 'whishlist';
+        this.wishListCacheKey = 'wishlist';
     }
 
     getWishList() {
-        const value = localStorage.getItem(this.whishListCacheKey);
+        const value = localStorage.getItem(this.wishListCacheKey);
 
         try {
             return JSON.parse(value) || {};
@@ -23,24 +23,28 @@ class WishListHandler {
             console.warn(error);
         }
 
-        localStorage.setItem(this.whishListCacheKey, rawValue);
+        localStorage.setItem(this.wishListCacheKey, rawValue);
     }
 
-    addToWishList(resourceType = 'media', value = {}) {
+    addToWishList(resourceType = 'anime', value = {}) {
         const currentWishList = this.getWishList();
-        currentWishList[`${resourceType}-${value.id}`] = { name: value.name, type: resourceType };
+        currentWishList[`${resourceType}-${value.id}`] = {
+            name: value.name,
+            type: resourceType,
+            id: value.id,
+        };
 
         this.saveWishList(currentWishList);
     }
 
-    removeFromWishList(resourceType = 'media', id = '') {
+    removeFromWishList(resourceType = 'anime', id = '') {
         const currentWishList = this.getWishList();
         delete currentWishList[`${resourceType}-${id}`];
 
         this.saveWishList(currentWishList);
     }
 
-    isInWishList(resourceType = 'media', id = '') {
+    isInWishList(resourceType = 'anime', id = '') {
         const currentWishList = this.getWishList();
         return `${resourceType}-${id}` in currentWishList;
     }

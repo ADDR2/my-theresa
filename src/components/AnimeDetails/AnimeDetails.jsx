@@ -9,7 +9,7 @@ import { ReactComponent as StarFilled } from '../../assets/star-filled.svg';
 import WishListHandler from '../../services/WishListHandler';
 import './AnimeDetails.scss';
 
-const RESOURCE_TYPE = 'media';
+const RESOURCE_TYPE = 'anime';
 
 function AnimeDetails() {
     const [{ lastAnimeDetails }] = useContext(AppContext);

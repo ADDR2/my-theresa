@@ -1,7 +1,10 @@
 @use '../../styles/abstracts/mixins.scss';
 
+$_anime-font: sans-serif;
+
 .character-details-container {
     @include mixins.detailsContainer;
+    font-family: $_anime-font;
 }
 
 .title-section {
