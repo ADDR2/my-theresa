@@ -1,0 +1,29 @@
+@use '../../styles/abstracts/layout.scss';
+
+.anime-details-container {
+    width: calc((100% - #{layout.$details-page-image-max-width}) - (#{layout.$app-min-row-gap-container} / 2));
+    box-shadow: layout.$app-shadow;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.anime-details-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
+
+.anime-genres-title {
+    @extend .anime-details-title;
+}
+
+.anime-episodes {
+    margin: 0;
+    color: var(--app-normal-text-color);
+}
+
+.anime-genres {
+    margin: 0;
+}

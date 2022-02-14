@@ -4,6 +4,7 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
+import AnimeDetails from '../components/AnimeDetails/AnimeDetails';
 import Header from '../components/Header/Header';
 import PageLoader from '../components/PageLoader/PageLoader';
 import {
@@ -35,7 +36,7 @@ function MainRouter() {
                     path="/anime/:animeId"
                     element={(
                         <PageLoader
-                            reactNode={<Details />}
+                            reactNode={<Details><AnimeDetails /></Details>}
                             queries={[LOAD_ANIME_DETAILS]}
                             useLoader={useAnimeDetailsLoader}
                         />
