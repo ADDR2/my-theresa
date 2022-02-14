@@ -16,6 +16,7 @@ function useHomeLoader(graphQLCall = () => {}) {
         () => {
             setAppState((currentState) => ({ ...currentState, isLoading: true }));
             graphQLCall().then((queryResults) => {
+                if (!queryResults) return;
                 const [mediaResponse, staffResponse, charactersResponse] = queryResults;
                 const { data: { Page: { media } } } = mediaResponse;
                 const { data: { Page: { staff } } } = staffResponse;

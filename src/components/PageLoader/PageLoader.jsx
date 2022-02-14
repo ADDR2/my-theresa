@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import LoadingBar from '../LoadingBar/LoadingBar';
 import { NOT_FOUND_PATH, SERVICE_DOWN_PATH } from '../../routers/RoutePaths';
+import { NOT_FOUND_REGEX } from '../../pages/Error/ErrorTypes';
 
 function PageLoader({
     queries,
@@ -21,8 +22,8 @@ function PageLoader({
             ));
         } catch (error) {
             console.warn(error);
-            navigate(error?.message?.includes('400') ? NOT_FOUND_PATH : SERVICE_DOWN_PATH);
-            return [];
+            navigate(NOT_FOUND_REGEX.test(error?.message) ? NOT_FOUND_PATH : SERVICE_DOWN_PATH);
+            return null;
         }
     }
 
