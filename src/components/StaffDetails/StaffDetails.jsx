@@ -61,11 +61,11 @@ function StaffDetails() {
             </div>
             <p className="staff-home-town">
                 <b>Home town:</b>
-                { ` ${homeTown}` }
+                { ` ${homeTown || '<Not defined>'}` }
             </p>
             <p className="staff-age">
                 <b>Age:</b>
-                { ` ${age}` }
+                { ` ${age || '<Not defined>'}` }
             </p>
         </section>
     );

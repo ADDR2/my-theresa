@@ -8,6 +8,7 @@ export function useAnimeDetailsLoader(graphQLCall = () => {}) {
         () => {
             setAppState((currentState) => ({ ...currentState, isLoading: true }));
             graphQLCall().then((queryResults) => {
+                if (!queryResults) return;
                 const [{ data: { Media } }] = queryResults;
 
                 setAppState((currentState) => ({
@@ -35,6 +36,7 @@ export function useStaffDetailsLoader(graphQLCall = () => {}) {
         () => {
             setAppState((currentState) => ({ ...currentState, isLoading: true }));
             graphQLCall().then((queryResults) => {
+                if (!queryResults) return;
                 const [{ data: { Staff } }] = queryResults;
 
                 setAppState((currentState) => ({
@@ -62,6 +64,7 @@ export function useCharacterDetailsLoader(graphQLCall = () => {}) {
         () => {
             setAppState((currentState) => ({ ...currentState, isLoading: true }));
             graphQLCall().then((queryResults) => {
+                if (!queryResults) return;
                 const [{ data: { Character } }] = queryResults;
 
                 setAppState((currentState) => ({

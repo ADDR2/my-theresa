@@ -61,7 +61,7 @@ function AnimeDetails() {
             </div>
             <p className="anime-episodes">
                 <b>Number of episodes:</b>
-                { ` ${episodes}` }
+                { ` ${episodes || '<Not defined>'}` }
             </p>
 
             <h3 className="anime-genres-title">List of genres</h3>
