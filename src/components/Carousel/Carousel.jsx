@@ -77,14 +77,14 @@ function Carousel({
     );
 }
 
-Carousel.defaultProps = { hasBanners: false };
+Carousel.defaultProps = { hasBanners: false, items: [] };
 Carousel.propTypes = {
     title: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         image: PropTypes.string,
         bannerImage: PropTypes.string,
-    })).isRequired,
+    })),
     linkPath: PropTypes.string.isRequired,
     hasBanners: PropTypes.bool,
 };

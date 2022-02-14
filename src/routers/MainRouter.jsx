@@ -5,8 +5,10 @@ import {
     Route,
 } from 'react-router-dom';
 import AnimeDetails from '../components/AnimeDetails/AnimeDetails';
+import CharacterDetails from '../components/CharacterDetails/CharacterDetails';
 import Header from '../components/Header/Header';
 import PageLoader from '../components/PageLoader/PageLoader';
+import StaffDetails from '../components/StaffDetails/StaffDetails';
 import {
     useAnimeDetailsLoader,
     useStaffDetailsLoader,
@@ -46,7 +48,7 @@ function MainRouter() {
                     path="/staff/:staffId"
                     element={(
                         <PageLoader
-                            reactNode={<Details />}
+                            reactNode={<Details><StaffDetails /></Details>}
                             queries={[LOAD_STAFF_DETAILS]}
                             useLoader={useStaffDetailsLoader}
                         />
@@ -56,7 +58,7 @@ function MainRouter() {
                     path="/character/:characterId"
                     element={(
                         <PageLoader
-                            reactNode={<Details />}
+                            reactNode={<Details><CharacterDetails /></Details>}
                             queries={[LOAD_CHARACTER_DETAILS]}
                             useLoader={useCharacterDetailsLoader}
                         />
