@@ -9,13 +9,15 @@ import { ReactComponent as StarFilled } from '../../assets/star-filled.svg';
 import WishListHandler from '../../services/WishListHandler';
 import './StaffDetails.scss';
 
+const RESOURCE_TYPE = 'staff';
+
 function StaffDetails() {
     const [{ lastStaffDetails }] = useContext(AppContext);
     const [isInWishList, setInWishList] = useState(false);
 
     useEffect(
         () => {
-            if (lastStaffDetails) setInWishList(WishListHandler.isInWishList(lastStaffDetails.id));
+            if (lastStaffDetails) setInWishList(WishListHandler.isInWishList(RESOURCE_TYPE, lastStaffDetails.id));
         },
         [lastStaffDetails],
     );
@@ -30,12 +32,12 @@ function StaffDetails() {
     } = lastStaffDetails;
 
     function saveInWishList() {
-        WishListHandler.addToWishList('staff', { name, id });
+        WishListHandler.addToWishList(RESOURCE_TYPE, { name, id });
         setInWishList(true);
     }
 
     function removeFromWishList() {
-        WishListHandler.removeFromWishList(id);
+        WishListHandler.removeFromWishList(RESOURCE_TYPE, id);
         setInWishList(false);
     }
 

@@ -9,13 +9,15 @@ import { ReactComponent as StarFilled } from '../../assets/star-filled.svg';
 import WishListHandler from '../../services/WishListHandler';
 import './AnimeDetails.scss';
 
+const RESOURCE_TYPE = 'media';
+
 function AnimeDetails() {
     const [{ lastAnimeDetails }] = useContext(AppContext);
     const [isInWishList, setInWishList] = useState(false);
 
     useEffect(
         () => {
-            if (lastAnimeDetails) setInWishList(WishListHandler.isInWishList(lastAnimeDetails.id));
+            if (lastAnimeDetails) setInWishList(WishListHandler.isInWishList(RESOURCE_TYPE, lastAnimeDetails.id));
         },
         [lastAnimeDetails],
     );
@@ -30,12 +32,12 @@ function AnimeDetails() {
     } = lastAnimeDetails;
 
     function saveInWishList() {
-        WishListHandler.addToWishList('media', { name, id });
+        WishListHandler.addToWishList(RESOURCE_TYPE, { name, id });
         setInWishList(true);
     }
 
     function removeFromWishList() {
-        WishListHandler.removeFromWishList(id);
+        WishListHandler.removeFromWishList(RESOURCE_TYPE, id);
         setInWishList(false);
     }
 

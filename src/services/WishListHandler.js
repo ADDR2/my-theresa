@@ -28,21 +28,21 @@ class WishListHandler {
 
     addToWishList(resourceType = 'media', value = {}) {
         const currentWishList = this.getWishList();
-        currentWishList[value.id] = { name: value.name, type: resourceType };
+        currentWishList[`${resourceType}-${value.id}`] = { name: value.name, type: resourceType };
 
         this.saveWishList(currentWishList);
     }
 
-    removeFromWishList(id = '') {
+    removeFromWishList(resourceType = 'media', id = '') {
         const currentWishList = this.getWishList();
-        delete currentWishList[id];
+        delete currentWishList[`${resourceType}-${id}`];
 
         this.saveWishList(currentWishList);
     }
 
-    isInWishList(id = '') {
+    isInWishList(resourceType = 'media', id = '') {
         const currentWishList = this.getWishList();
-        return id in currentWishList;
+        return `${resourceType}-${id}` in currentWishList;
     }
 }
 
