@@ -1,0 +1,27 @@
+@use '../../styles/abstracts/layout.scss';
+@use '../../styles/abstracts/mixins.scss';
+
+$_error-page-min-height: 400px;
+
+.error-page {
+    padding: layout.$app-page-padding;
+    width: 100%;
+    height: calc(100vh - #{layout.$app-header-height});
+    min-height: $_error-page-min-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: layout.$app-min-row-gap-container;
+}
+
+.error-page-image {
+    width: calc(#{$_error-page-min-height} / 2);
+    height: calc(#{$_error-page-min-height} / 2);
+}
+
+.error-page-message {
+    margin: 0;
+    word-wrap: break-word;
+    color: var(--app-error-message-color);
+}
