@@ -20,8 +20,15 @@ import {
     LOAD_CHARACTER_DETAILS,
     LOAD_STAFF_DETAILS,
 } from '../pages/Details/Details.queries';
+import ErrorPage from '../pages/Error/Error';
+import { RESOURCE_NOT_FOUND, SERVICE_DOWN } from '../pages/Error/ErrorTypes';
 import useHomeLoader from '../pages/Home/Home.hooks';
 import { queriesToLoadHome } from '../pages/Home/Home.queries';
+import {
+    HOME_PATH,
+    NOT_FOUND_PATH,
+    SERVICE_DOWN_PATH,
+} from './RoutePaths';
 
 const Home = React.lazy(() => import('../pages/Home/Home'));
 const Details = React.lazy(() => import('../pages/Details/Details'));
@@ -33,7 +40,7 @@ function MainRouter() {
             <Header />
             <Routes>
                 <Route
-                    path="/"
+                    path={HOME_PATH}
                     element={<PageLoader reactNode={<Home />} queries={queriesToLoadHome} useLoader={useHomeLoader} />}
                 />
                 <Route
@@ -69,6 +76,18 @@ function MainRouter() {
                 <Route
                     path="/wishlist"
                     element={<Suspense fallback={<LoadingBar />}><WishList /></Suspense>}
+                />
+                <Route
+                    path={SERVICE_DOWN_PATH}
+                    element={<ErrorPage message={SERVICE_DOWN} />}
+                />
+                <Route
+                    path={NOT_FOUND_PATH}
+                    element={<ErrorPage message={RESOURCE_NOT_FOUND} />}
+                />
+                <Route
+                    path="*"
+                    element={<ErrorPage message={RESOURCE_NOT_FOUND} />}
                 />
             </Routes>
         </Router>

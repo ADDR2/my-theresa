@@ -1,8 +1,9 @@
 import { useApolloClient } from '@apollo/client';
 import { Suspense, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import LoadingBar from '../LoadingBar/LoadingBar';
+import { NOT_FOUND_PATH, SERVICE_DOWN_PATH } from '../../routers/RoutePaths';
 
 function PageLoader({
     queries,
@@ -11,6 +12,7 @@ function PageLoader({
 }) {
     const client = useApolloClient();
     const params = useParams();
+    const navigate = useNavigate();
 
     async function executeQueries() {
         try {
@@ -19,11 +21,12 @@ function PageLoader({
             ));
         } catch (error) {
             console.warn(error);
+            navigate(error?.message?.includes('400') ? NOT_FOUND_PATH : SERVICE_DOWN_PATH);
             return [];
         }
     }
 
-    const memoizedQueryCallback = useCallback(executeQueries, [client, queries, params]);
+    const memoizedQueryCallback = useCallback(executeQueries, [client, queries, params, navigate]);
     const isLoading = useLoader(memoizedQueryCallback);
 
     if (isLoading) return <LoadingBar />
