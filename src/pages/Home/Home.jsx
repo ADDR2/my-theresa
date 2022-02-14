@@ -11,7 +11,7 @@ function Home() {
     }] = useContext(AppContext);
 
     return (
-        <div className="home-page">
+        <div role="home-container" className="home-page">
             <Carousel title="Anime" items={media} linkPath="/anime/" hasBanners />
             <Carousel title="Staff" items={staff} linkPath="/staff/" />
             <Carousel title="Anime Characters" items={characters} linkPath="/character/" />

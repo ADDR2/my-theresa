@@ -41,7 +41,7 @@ function Carousel({
     );
 
     return (
-        <section>
+        <section role="carousel-container">
             <h1 className="carousel-title">{ title }</h1>
             <div className="carousel-container">
                 {canMoveToLeft
