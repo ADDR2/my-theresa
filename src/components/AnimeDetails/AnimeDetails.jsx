@@ -6,7 +6,7 @@ import {
 import AppContext from '../App/Context';
 import { ReactComponent as StarOutline } from '../../assets/star-outline.svg';
 import { ReactComponent as StarFilled } from '../../assets/star-filled.svg';
-import WishlistHandler from '../../services/WishListHandler';
+import WishListHandler from '../../services/WishListHandler';
 import './AnimeDetails.scss';
 
 function AnimeDetails() {
@@ -15,7 +15,7 @@ function AnimeDetails() {
 
     useEffect(
         () => {
-            if (lastAnimeDetails) setInWishList(WishlistHandler.isInWishList(lastAnimeDetails.id));
+            if (lastAnimeDetails) setInWishList(WishListHandler.isInWishList(lastAnimeDetails.id));
         },
         [lastAnimeDetails],
     );
@@ -30,12 +30,12 @@ function AnimeDetails() {
     } = lastAnimeDetails;
 
     function saveInWishList() {
-        WishlistHandler.addToWishList('media', { name, id });
+        WishListHandler.addToWishList('media', { name, id });
         setInWishList(true);
     }
 
     function removeFromWishList() {
-        WishlistHandler.removeFromWishList(id);
+        WishListHandler.removeFromWishList(id);
         setInWishList(false);
     }
 

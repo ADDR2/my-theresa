@@ -4,6 +4,17 @@
     @include mixins.detailsContainer;
 }
 
+.title-section {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2rem;
+    align-items: center;
+}
+
+.star-outline, .star-filled {
+    @include mixins.roundButtonForIcon;
+}
+
 .staff-details-title {
     margin: 0;
     color: var(--app-section-title-color);
