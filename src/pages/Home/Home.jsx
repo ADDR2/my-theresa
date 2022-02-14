@@ -14,7 +14,7 @@ function Home() {
         <div className="home-page">
             <Carousel title="Anime" items={media} linkPath="/anime/" hasBanners />
             <Carousel title="Staff" items={staff} linkPath="/staff/" />
-            <Carousel title="Anime Characters" items={characters} linkPath="/characters/" />
+            <Carousel title="Anime Characters" items={characters} linkPath="/character/" />
         </div>
     );
 }

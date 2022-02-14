@@ -4,12 +4,26 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
+import AnimeDetails from '../components/AnimeDetails/AnimeDetails';
+import CharacterDetails from '../components/CharacterDetails/CharacterDetails';
 import Header from '../components/Header/Header';
 import PageLoader from '../components/PageLoader/PageLoader';
+import StaffDetails from '../components/StaffDetails/StaffDetails';
+import {
+    useAnimeDetailsLoader,
+    useStaffDetailsLoader,
+    useCharacterDetailsLoader,
+} from '../pages/Details/Details.hooks';
+import {
+    LOAD_ANIME_DETAILS,
+    LOAD_CHARACTER_DETAILS,
+    LOAD_STAFF_DETAILS,
+} from '../pages/Details/Details.queries';
 import useHomeLoader from '../pages/Home/Home.hooks';
-import { queriesToLoadPage } from '../pages/Home/Home.queries';
+import { queriesToLoadHome } from '../pages/Home/Home.queries';
 
 const Home = React.lazy(() => import('../pages/Home/Home'));
+const Details = React.lazy(() => import('../pages/Details/Details'));
 
 function MainRouter() {
     return (
@@ -18,7 +32,37 @@ function MainRouter() {
             <Routes>
                 <Route
                     path="/"
-                    element={<PageLoader reactNode={<Home />} queries={queriesToLoadPage} useLoader={useHomeLoader} />}
+                    element={<PageLoader reactNode={<Home />} queries={queriesToLoadHome} useLoader={useHomeLoader} />}
+                />
+                <Route
+                    path="/anime/:animeId"
+                    element={(
+                        <PageLoader
+                            reactNode={<Details><AnimeDetails /></Details>}
+                            queries={[LOAD_ANIME_DETAILS]}
+                            useLoader={useAnimeDetailsLoader}
+                        />
+                    )}
+                />
+                <Route
+                    path="/staff/:staffId"
+                    element={(
+                        <PageLoader
+                            reactNode={<Details><StaffDetails /></Details>}
+                            queries={[LOAD_STAFF_DETAILS]}
+                            useLoader={useStaffDetailsLoader}
+                        />
+                    )}
+                />
+                <Route
+                    path="/character/:characterId"
+                    element={(
+                        <PageLoader
+                            reactNode={<Details><CharacterDetails /></Details>}
+                            queries={[LOAD_CHARACTER_DETAILS]}
+                            useLoader={useCharacterDetailsLoader}
+                        />
+                    )}
                 />
             </Routes>
         </Router>

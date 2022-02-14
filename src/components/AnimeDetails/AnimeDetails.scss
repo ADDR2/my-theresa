@@ -1,0 +1,23 @@
+@use '../../styles/abstracts/mixins.scss';
+
+.anime-details-container {
+    @include mixins.detailsContainer;
+}
+
+.anime-details-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
+
+.anime-genres-title {
+    @extend .anime-details-title;
+}
+
+.anime-episodes {
+    margin: 0;
+    color: var(--app-normal-text-color);
+}
+
+.anime-genres {
+    margin: 0;
+}

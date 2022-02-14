@@ -1,0 +1,15 @@
+@use '../../styles/abstracts/mixins.scss';
+
+.character-details-container {
+    @include mixins.detailsContainer;
+}
+
+.character-details-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
+
+.character-age, .character-gender {
+    margin: 0;
+    color: var(--app-normal-text-color);
+}

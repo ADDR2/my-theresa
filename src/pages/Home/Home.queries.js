@@ -37,7 +37,7 @@ query getCharacters {
 }
 `;
 
-export const queriesToLoadPage = [
+export const queriesToLoadHome = [
     LOAD_ANIME_IMAGES,
     LOAD_STAFF_IMAGES,
     LOAD_CHARACTER_IMAGES,

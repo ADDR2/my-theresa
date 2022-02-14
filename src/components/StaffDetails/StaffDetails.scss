@@ -1,0 +1,15 @@
+@use '../../styles/abstracts/mixins.scss';
+
+.staff-details-container {
+    @include mixins.detailsContainer;
+}
+
+.staff-details-title {
+    margin: 0;
+    color: var(--app-section-title-color);
+}
+
+.staff-age, .staff-home-town {
+    margin: 0;
+    color: var(--app-normal-text-color);
+}

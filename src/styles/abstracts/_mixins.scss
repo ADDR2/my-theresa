@@ -1,0 +1,11 @@
+@use './layout.scss';
+
+@mixin detailsContainer {
+    width: calc((100% - #{layout.$details-page-image-max-width}) - (#{layout.$app-min-row-gap-container} / 2));
+    box-shadow: layout.$app-shadow;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
