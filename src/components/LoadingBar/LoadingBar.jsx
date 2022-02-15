@@ -2,7 +2,7 @@ import './LoadingBar.scss';
 
 function LoadingBar() {
     return (
-        <div className="loading-bar-container">
+        <div role="loading-container" className="loading-bar-container">
             <div className="loaded-content" />
         </div>
     );
