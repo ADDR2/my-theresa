@@ -42,18 +42,20 @@ function AnimeDetails() {
     }
 
     return (
-        <section className="anime-details-container">
+        <section role="anime-details-container" className="anime-details-container">
             <div className="title-section">
                 <h2 className="anime-details-title">Anime Info</h2>
                 {!isInWishList
                     ? (
                         <StarOutline
+                            role="outlined-star"
                             className="star-outline"
                             onClick={() => saveInWishList()}
                         />
                     )
                     : (
                         <StarFilled
+                            role="filled-star"
                             className="star-filled"
                             onClick={() => removeFromWishList()}
                         />
@@ -66,7 +68,7 @@ function AnimeDetails() {
 
             <h3 className="anime-genres-title">List of genres</h3>
             <ul className="anime-genres">
-                { genres.map((genre) => (<li key={genre} className="genre">{ genre }</li>)) }
+                { genres.map((genre) => (<li role="genre" key={genre} className="genre">{ genre }</li>)) }
             </ul>
         </section>
     );
