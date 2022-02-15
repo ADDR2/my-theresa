@@ -1,9 +1,13 @@
-import { render, screen, cleanup } from '../../../test-utils';
+import { EventEmitter } from 'events';
+import {
+    render,
+    screen,
+    cleanup,
+} from '../../../test-utils';
 import PageLoader from './PageLoader';
 import { getServerMocked, serverCases } from './__mock__/graphQLServer';
 import { LOAD_ANIME_IMAGES } from '../../pages/Home/Home.queries';
-import { useLoaderMock } from './__mock__/stubs';
-import { EventEmitter } from 'events';
+import useLoaderMock from './__mock__/stubs';
 
 jest.mock('react-router-dom', () => {
     const useParamsMock = jest.fn(() => ({}));
@@ -14,6 +18,7 @@ jest.mock('react-router-dom', () => {
 });
 
 const { useParams: useParamsMock, useNavigate: useNavigateMock } = require('react-router-dom');
+
 const server = getServerMocked(serverCases.BAD_REQUEST);
 
 describe('PageLoader Happy Path Tests', () => {
@@ -35,13 +40,15 @@ describe('PageLoader Happy Path Tests', () => {
 
         render(
             <PageLoader
-                queries={[ LOAD_ANIME_IMAGES ]}
+                queries={[LOAD_ANIME_IMAGES]}
                 reactNode={<div role="sample" />}
                 useLoader={useLoaderMock(emitter)}
-            />
+            />,
         );
 
-        await new Promise(resolve => emitter.once('call-finished', resolve));
+        await new Promise((resolve) => {
+            emitter.once('call-finished', resolve);
+        });
 
         const loadingContainer = screen.getByRole('loading-container');
 
