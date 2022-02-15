@@ -1,6 +1,10 @@
-
 import { useContext, useEffect } from 'react';
-import { render, waitFor, screen, cleanup } from '../../../test-utils';
+import {
+    render,
+    waitFor,
+    screen,
+    cleanup,
+} from '../../../test-utils';
 import AppContext from '../../components/App/Context';
 import Home from './Home';
 import useHomeLoader from './Home.hooks';
@@ -8,18 +12,20 @@ import useHomeLoader from './Home.hooks';
 afterEach(cleanup);
 afterAll(() => jest.clearAllMocks());
 
-jest.mock('../../components/CarouselItem/CarouselItem', () => {
-    return ({ image, bannerImage }) => (<div role="carousel-sample-item">{ image || bannerImage }</div>);
-});
+jest.mock('../../components/CarouselItem/CarouselItem', () => (
+    function Component() {
+        return (<div role="carousel-sample-item" />);
+    }
+));
 
 describe('Home Tests', () => {
     test('renders Home page when context has no data', async () => {
         render(<Home />);
-    
+
         await waitFor(() => screen.getByRole('home-container'));
         const homeContainer = screen.getByRole('home-container');
         const carouselContainers = screen.getAllByRole('carousel-container');
-    
+
         expect(homeContainer).toBeInTheDocument();
         expect(homeContainer).toHaveClass('home-page');
         expect(carouselContainers.length).toEqual(3);
@@ -27,11 +33,11 @@ describe('Home Tests', () => {
 
     test('renders Home page when context has some data', async () => {
         render(<Home />, { media: [{ id: 4, bannerImage: 'image' }], characters: [{ id: 678, image: 'test' }] });
-    
+
         await waitFor(() => screen.getByRole('home-container'));
         const homeContainer = screen.getByRole('home-container');
         const carouselContainers = screen.getAllByRole('carousel-container');
-    
+
         expect(homeContainer).toBeInTheDocument();
         expect(homeContainer).toHaveClass('home-page');
         expect(carouselContainers.length).toEqual(3);
@@ -41,7 +47,7 @@ describe('Home Tests', () => {
         let didFail = false;
         try {
             render(<Home />, null);
-        } catch(error) {
+        } catch (error) {
             didFail = true;
         }
 
@@ -56,8 +62,8 @@ describe('Home Tests', () => {
             { data: { Page: { characters: [] } } },
         ];
         const mockGraphQLCall = jest.fn(() => Promise.resolve(mockResults));
-        const stateChanger = jest.fn((newState) => currentState = newState);
-        const SampleComponent = () => {
+        const stateChanger = jest.fn((newState) => { currentState = newState; });
+        function SampleComponent() {
             useHomeLoader(mockGraphQLCall);
             const [state] = useContext(AppContext);
 
@@ -65,11 +71,11 @@ describe('Home Tests', () => {
                 () => {
                     stateChanger(state);
                 },
-                [state]
+                [state],
             );
 
-            return <div role="sample" />;
-        };
+            return (<div role="sample" />);
+        }
 
         render(
             <SampleComponent />,
@@ -100,8 +106,8 @@ describe('Home Tests', () => {
             isLoading: false,
         };
         const mockGraphQLCall = jest.fn(() => Promise.resolve(mockResults));
-        const stateChanger = jest.fn((newState) => currentState = newState);
-        const SampleComponent = () => {
+        const stateChanger = jest.fn((newState) => { currentState = newState; });
+        function SampleComponent() {
             useHomeLoader(mockGraphQLCall);
             const [state] = useContext(AppContext);
 
@@ -109,11 +115,11 @@ describe('Home Tests', () => {
                 () => {
                     stateChanger(state);
                 },
-                [state]
+                [state],
             );
 
             return <div role="sample" />;
-        };
+        }
 
         render(
             <SampleComponent />,

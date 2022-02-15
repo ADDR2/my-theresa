@@ -1,8 +1,13 @@
-import { render, waitFor, screen, cleanup } from '../../../test-utils';
+import {
+    render,
+    waitFor,
+    screen,
+    cleanup,
+} from '../../../test-utils';
 import PageLoader from './PageLoader';
 import server from './__mock__/graphQLServer';
 import { LOAD_ANIME_IMAGES } from '../../pages/Home/Home.queries';
-import { useLoaderMock } from './__mock__/stubs';
+import useLoaderMock from './__mock__/stubs';
 
 jest.mock('react-router-dom', () => {
     const useParamsMock = jest.fn(() => ({}));
@@ -34,13 +39,13 @@ describe('PageLoader Happy Path Tests', () => {
                 queries={[]}
                 reactNode={<div role="sample" />}
                 useLoader={useLoaderMock()}
-            />
+            />,
         );
 
         await waitFor(() => screen.getByRole('loading-container'));
 
         const loadingContainer = screen.getByRole('loading-container');
-    
+
         expect(loadingContainer).toBeInTheDocument();
         expect(useParamsMock).toHaveBeenCalledTimes(1);
         expect(useNavigateMock()).not.toHaveBeenCalled();
@@ -49,16 +54,16 @@ describe('PageLoader Happy Path Tests', () => {
     test('should render reactNode when finishes getting the data', async () => {
         render(
             <PageLoader
-                queries={[ LOAD_ANIME_IMAGES ]}
+                queries={[LOAD_ANIME_IMAGES]}
                 reactNode={<div role="sample" />}
                 useLoader={useLoaderMock()}
-            />
+            />,
         );
 
         await waitFor(() => screen.getByRole('sample'));
 
         const sampleContainer = screen.getByRole('sample');
-    
+
         expect(sampleContainer).toBeInTheDocument();
         expect(useParamsMock).toHaveBeenCalledTimes(2);
         expect(useNavigateMock()).not.toHaveBeenCalled();
