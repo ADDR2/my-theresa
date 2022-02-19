@@ -6,6 +6,7 @@ import {
     cleanup,
 } from '../../../test-utils';
 import AppContext from '../../components/App/Context';
+import { NO_DATA_FOUND_MESSAGE } from '../../constants';
 import Home from './Home';
 import useHomeLoader from './Home.hooks';
 
@@ -19,20 +20,40 @@ jest.mock('../../components/CarouselItem/CarouselItem', () => (
 ));
 
 describe('Home Tests', () => {
-    test('renders Home page when context has no data', async () => {
+    test('renders Home page with message when context has no data', async () => {
         render(<Home />);
 
-        await waitFor(() => screen.getByRole('home-container'));
-        const homeContainer = screen.getByRole('home-container');
-        const carouselContainers = screen.getAllByRole('carousel-container');
+        await waitFor(() => screen.getByRole('home-empty-container'));
+        const homeContainer = screen.getByRole('home-empty-container');
+        const messageContainer = screen.getByRole('heading');
 
         expect(homeContainer).toBeInTheDocument();
-        expect(homeContainer).toHaveClass('home-page');
-        expect(carouselContainers.length).toEqual(3);
+        expect(homeContainer).toHaveClass('home-empty-page');
+        expect(messageContainer).toBeInTheDocument();
+        expect(messageContainer).toHaveTextContent(NO_DATA_FOUND_MESSAGE);
+
+        let errorLookingForHomeContainer = false;
+        let errorLookingForCarouselContainer = false;
+
+        try {
+            screen.getAllByRole('home-container');
+        } catch (error) {
+            errorLookingForHomeContainer = true;
+        }
+
+        try {
+            screen.getAllByRole('carousel-container');
+        } catch (error) {
+            errorLookingForCarouselContainer = true;
+        }
+
+        expect(errorLookingForHomeContainer).toEqual(true);
+        expect(errorLookingForCarouselContainer).toEqual(true);
     });
 
     test('renders Home page when context has some data', async () => {
-        render(<Home />, { media: [{ id: 4, bannerImage: 'image' }], characters: [{ id: 678, image: 'test' }] });
+        const contextData = { media: [{ id: 4, bannerImage: 'image' }], characters: [{ id: 678, image: 'test' }] };
+        render(<Home />, contextData);
 
         await waitFor(() => screen.getByRole('home-container'));
         const homeContainer = screen.getByRole('home-container');
@@ -40,7 +61,7 @@ describe('Home Tests', () => {
 
         expect(homeContainer).toBeInTheDocument();
         expect(homeContainer).toHaveClass('home-page');
-        expect(carouselContainers.length).toEqual(3);
+        expect(carouselContainers.length).toEqual(Object.keys(contextData).length);
     });
 
     test('does not render Home page when invalid context state', () => {

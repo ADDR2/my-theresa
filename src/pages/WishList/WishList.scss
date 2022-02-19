@@ -37,3 +37,7 @@
 .wish-list-remove-icon {
     @include mixins.roundButtonForIcon;
 }
+
+.wish-list-empty-page {
+    @include mixins.noDataMessage;
+}

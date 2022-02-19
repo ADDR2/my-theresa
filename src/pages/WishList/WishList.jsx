@@ -4,6 +4,7 @@ import WishListHandler from '../../services/WishListHandler';
 import { ReactComponent as RemoveIcon } from '../../assets/remove-icon.svg';
 
 import './WishList.scss';
+import { NO_DATA_FOUND_MESSAGE } from '../../constants';
 
 function WishList() {
     const [wishList, setWishList] = useState(WishListHandler.getWishList());
@@ -16,6 +17,14 @@ function WishList() {
     function removeFromWishList(type, id) {
         WishListHandler.removeFromWishList(type, id);
         setWishList(WishListHandler.getWishList());
+    }
+
+    if (wishListArray.length <= 0) {
+        return (
+            <div role="wish-list-empty-container" className="wish-list-empty-page">
+                <h1 className="no-data-message">{NO_DATA_FOUND_MESSAGE}</h1>
+            </div>
+        );
     }
 
     return (

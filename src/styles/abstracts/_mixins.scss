@@ -33,3 +33,20 @@
         outline-offset: 2px;
     }
 }
+
+@mixin noDataMessage {
+    padding: layout.$app-page-padding;
+    width: 100%;
+    height: calc(100vh - #{layout.$app-header-height});
+    min-height: layout.$app-min-page-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > h1 {
+        margin: 0;
+        word-wrap: break-word;
+        color: var(--app-error-message-color);
+    }
+}
